@@ -1,8 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import './Work.css';
 
 const Work = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const preservedScrollRef = useRef(0);
+
+  const handleFilterChange = (filterId) => {
+    if (typeof window !== 'undefined') {
+      preservedScrollRef.current = window.scrollY;
+    }
+    setActiveFilter(filterId);
+  };
+
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.scrollTo({ top: preservedScrollRef.current });
+  }, [activeFilter]);
   
   const projects = [
     {
@@ -115,7 +128,7 @@ const Work = () => {
                   <button
                     key={category.id}
                     className={`filter-item ${activeFilter === category.id ? 'active' : ''}`}
-                    onClick={() => setActiveFilter(category.id)}
+                      onClick={() => handleFilterChange(category.id)}
                   >
                     <span className="filter-label">{category.label}</span>
                     <span className="filter-count">
@@ -132,11 +145,10 @@ const Work = () => {
           {/* Projects Grid */}
           <div className="projects-wrapper">
             <div className="projects-grid">
-              {filteredProjects.map((project, index) => (
+              {filteredProjects.map((project) => (
                 <div 
                   key={project.id} 
                   className="project-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="project-thumbnail">
                     <img src={project.thumbnail} alt={project.title} />
