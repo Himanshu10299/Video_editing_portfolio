@@ -34,6 +34,12 @@
   transition: transform 0.3s ease;
 }
 
+.logo-image {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
 .logo:hover {
   transform: scale(1.05);
 }
