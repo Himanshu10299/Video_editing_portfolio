@@ -38,7 +38,7 @@ const Navbar = () => {
         <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
           <a href="#work" onClick={closeMobileMenu}>Work</a>
           <a href="#services" onClick={closeMobileMenu}>Services</a>
-          <a href="#testimonials" onClick={closeMobileMenu}>Testimonials</a>
+          {/* <a href="#testimonials" onClick={closeMobileMenu}>Testimonials</a> */}
           <a href="#contact" onClick={closeMobileMenu}>Contact</a>
           <a href="#contact" className="nav-cta" onClick={closeMobileMenu}>
             Start a Project
