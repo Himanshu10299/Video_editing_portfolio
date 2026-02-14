@@ -32,12 +32,72 @@
   font-size: 1.3rem;
   font-weight: 700;
   transition: transform 0.3s ease;
+  position: relative;
+  min-width: fit-content;
 }
 
 .logo-image {
   width: 32px;
   height: 32px;
   object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-name {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateX(0);
+  white-space: nowrap;
+}
+
+.logo-name.hidden {
+  opacity: 0;
+  transform: translateX(-10px);
+  position: absolute;
+  left: 48px;
+  pointer-events: none;
+}
+
+.freelance-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: linear-gradient(135deg, rgba(255, 120, 40, 0.15), rgba(255, 80, 20, 0.15));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 120, 40, 0.4);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffa366;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.freelance-badge.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #ff7828;
+  border-radius: 50%;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #ff7828, 0 0 10px #ff7828;
+  }
+  50% {
+    box-shadow: 0 0 10px #ff7828, 0 0 20px #ff7828;
+  }
 }
 
 .logo:hover {
@@ -134,6 +194,21 @@
   
   .navbar.scrolled {
     padding: 0.75rem 1.5rem;
+  }
+  
+  .logo {
+    font-size: 1.1rem;
+  }
+  
+  .logo-image {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .freelance-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    left: 38px;
   }
   
   .mobile-menu-button {

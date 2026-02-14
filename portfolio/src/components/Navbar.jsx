@@ -28,7 +28,11 @@ const Navbar = () => {
       <div className="navbar-container">
         <a href="#" className="logo">
           <img src={logo} alt="Logo" className="logo-image" />
-          <span>Himanshu Tomar</span>
+          <span className={`logo-name ${scrolled ? 'hidden' : ''}`}>Himanshu Tomar</span>
+          <div className={`freelance-badge ${scrolled ? 'visible' : ''}`}>
+            <span className="badge-dot"></span>
+            Available for Freelance
+          </div>
         </a>
 
         <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
