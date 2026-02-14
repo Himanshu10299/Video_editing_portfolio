@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <a href="#" className="logo">
           <img src={logo} alt="Logo" className="logo-image" />
-          <span>Portfolio</span>
+          <span>Himanshu Tomar</span>
         </a>
 
         <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>

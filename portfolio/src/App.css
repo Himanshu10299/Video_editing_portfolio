@@ -20,17 +20,17 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff7828 0%, #ff5014 100%);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  background: linear-gradient(135deg, #ff5014 0%, #ff7828 100%);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(102, 126, 234, 0.3);
+  background: rgba(255, 120, 40, 0.3);
   color: white;
 }
 

@@ -14,8 +14,8 @@ const Footer = () => {
                 <path d="M12 10l8 6-8 6V10z" fill="white"/>
                 <defs>
                   <linearGradient id="gradient-footer" x1="0" y1="0" x2="32" y2="32">
-                    <stop offset="0%" stopColor="#667eea"/>
-                    <stop offset="100%" stopColor="#764ba2"/>
+                    <stop offset="0%" stopColor="#ff7828"/>
+                    <stop offset="100%" stopColor="#ff5014"/>
                   </linearGradient>
                 </defs>
               </svg>

@@ -9,6 +9,28 @@
   margin: 0 auto;
 }
 
+/* Section Header */
+.section-tag {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 120, 40, 0.2), rgba(255, 80, 20, 0.2));
+  border: 1px solid rgba(255, 120, 40, 0.3);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffa366;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #f5f5f0;
+}
+
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -22,7 +44,8 @@
 }
 
 .contact-description {
-  color: rgba(255, 255, 255, 0.7);
+  color: #f5f5f0;
+  opacity: 0.8;
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 3rem;
@@ -48,7 +71,7 @@
 
 .contact-item:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(102, 126, 234, 0.5);
+  border-color: rgba(255, 120, 40, 0.5);
   transform: translateX(10px);
 }
 
@@ -56,7 +79,7 @@
   font-size: 2rem;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff7828 0%, #ff5014 100%);
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -65,7 +88,7 @@
 
 .contact-item h4 {
   margin: 0 0 0.25rem 0;
-  color: white;
+  color: #f5f5f0;
   font-size: 1.1rem;
 }
 
@@ -95,7 +118,7 @@
 }
 
 .social-link:hover {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff7828 0%, #ff5014 100%);
   border-color: transparent;
   color: white;
   transform: translateY(-3px);
@@ -146,8 +169,8 @@
 .form-group textarea:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.08);
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #ff7828;
+  box-shadow: 0 0 0 3px rgba(255, 120, 40, 0.15);
 }
 
 .form-group input::placeholder,
@@ -177,7 +200,7 @@
 .submit-button {
   width: 100%;
   padding: 1.25rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff7828 0%, #ff5014 100%);
   border: none;
   border-radius: 12px;
   color: white;
@@ -189,12 +212,12 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 120, 40, 0.3);
 }
 
 .submit-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 15px 40px rgba(255, 120, 40, 0.5);
 }
 
 .submit-button:active {
