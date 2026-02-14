@@ -105,50 +105,66 @@ const Work = () => {
           </p>
         </div>
 
-        <div className="filter-tabs">
-          {categories.map(category => (
-            <button
-              key={category.id}
-              className={`filter-tab ${activeFilter === category.id ? 'active' : ''}`}
-              onClick={() => setActiveFilter(category.id)}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <div 
-              key={project.id} 
-              className="project-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="project-thumbnail">
-                <img src={project.thumbnail} alt={project.title} />
-                <div className="project-overlay">
-                  <button className="play-button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M8 5.14v14.72L19 12 8 5.14z" fill="currentColor"/>
-                    </svg>
-                    Play Video
+        <div className="work-content">
+          {/* Filter Sidebar */}
+          <aside className="filter-sidebar">
+            <div className="filter-sidebar-inner">
+              <h3 className="filter-title">Categories</h3>
+              <div className="filter-list">
+                {categories.map(category => (
+                  <button
+                    key={category.id}
+                    className={`filter-item ${activeFilter === category.id ? 'active' : ''}`}
+                    onClick={() => setActiveFilter(category.id)}
+                  >
+                    <span className="filter-label">{category.label}</span>
+                    <span className="filter-count">
+                      {category.id === 'all' 
+                        ? projects.length 
+                        : projects.filter(p => p.category === category.id).length}
+                    </span>
                   </button>
-                </div>
-                <div className="duration-badge">{project.duration}</div>
-              </div>
-              
-              <div className="project-info">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-                
-                <div className="project-tags">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className="tag">{tag}</span>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
-          ))}
+          </aside>
+
+          {/* Projects Grid */}
+          <div className="projects-wrapper">
+            <div className="projects-grid">
+              {filteredProjects.map((project, index) => (
+                <div 
+                  key={project.id} 
+                  className="project-card"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <div className="project-thumbnail">
+                    <img src={project.thumbnail} alt={project.title} />
+                    <div className="project-overlay">
+                      <button className="play-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path d="M8 5.14v14.72L19 12 8 5.14z" fill="currentColor"/>
+                        </svg>
+                        Play Video
+                      </button>
+                    </div>
+                    <div className="duration-badge">{project.duration}</div>
+                  </div>
+                  
+                  <div className="project-info">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+                    
+                    <div className="project-tags">
+                      {project.tags.map((tag, i) => (
+                        <span key={i} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
