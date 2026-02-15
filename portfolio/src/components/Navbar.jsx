@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Navbar.css';
-import logo from '../assets/mylogo.png';
+import logo from '../assets/mylogot.png';
 
 const Navbar = ({ videoOpen = false }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -28,10 +28,12 @@ const Navbar = ({ videoOpen = false }) => {
       <div className="navbar-container">
         <a href="#" className="logo">
           <img src={logo} alt="Logo" className="logo-image" />
-          <span className={`logo-name ${scrolled ? 'hidden' : ''}`}>Himanshu Tomar</span>
-          <div className={`freelance-badge ${scrolled ? 'visible' : ''}`}>
-            <span className="badge-dot"></span>
-            Available for Freelance
+          <div className="logo-text-stack">
+            <span className={`logo-name ${scrolled ? 'hidden' : ''}`}>Himanshu Tomar</span>
+            <div className={`freelance-badge ${scrolled ? 'visible' : ''}`}>
+              <span className="badge-dot"></span>
+              Available for Freelance
+            </div>
           </div>
         </a>
 

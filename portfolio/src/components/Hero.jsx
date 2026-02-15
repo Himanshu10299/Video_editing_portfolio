@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Hero.css';
 
 const Hero = () => {
   const textRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -20,6 +21,15 @@ const Hero = () => {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="hero">
       <div className="hero-background">
@@ -29,7 +39,7 @@ const Hero = () => {
       </div>
       
       <div className="hero-content" ref={textRef}>
-        <div className="hero-badge">
+        <div className={`hero-badge ${scrolled ? 'scrolled' : ''}`}>
           <span className="badge-dot"></span>
           Available for Freelance
         </div>
