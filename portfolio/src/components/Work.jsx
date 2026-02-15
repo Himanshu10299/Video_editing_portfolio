@@ -25,6 +25,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
   useEffect(() => {
     return () => {
       document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
     };
   }, []);
 
@@ -34,6 +35,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
       if (e.key === 'Escape' && selectedVideo) {
         setSelectedVideo(null);
         document.body.style.overflow = 'unset';
+        document.documentElement.style.overflow = 'unset';
         onVideoClose();
       }
     };
@@ -64,6 +66,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
     onVideoOpen();
     // Lock body scroll when video opens
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
@@ -71,6 +74,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
     onVideoClose();
     // Restore body scroll
     document.body.style.overflow = 'unset';
+    document.documentElement.style.overflow = 'unset';
   };
 
   return (
@@ -83,8 +87,6 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
             A selection of projects showcasing various styles and techniques
           </p>
         </div>
-
-          onVideoClose();
         <div className="work-content">
           {/* Filter Sidebar */}
           <aside className="filter-sidebar">
