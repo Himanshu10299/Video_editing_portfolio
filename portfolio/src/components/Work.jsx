@@ -4,7 +4,7 @@ import { processYouTubeVideos, videoCategories } from '../data/workData';
 import './Work.css';
 
 const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,6 +16,17 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
       setLoading(true);
       const videos = await processYouTubeVideos();
       setProjects(videos);
+      
+      // Set default filter to the first enabled category that has videos
+      if (videos.length > 0) {
+        const firstCategory = videoCategories.find(cat => 
+          cat.enabled !== false && videos.some(v => v.category === cat.id)
+        );
+        if (firstCategory) {
+          setActiveFilter(firstCategory.id);
+        }
+      }
+      
       setLoading(false);
     };
     loadVideos();
@@ -55,11 +66,12 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
     window.scrollTo({ top: preservedScrollRef.current });
   }, [activeFilter]);
   
-  const categories = videoCategories;
+  // Filter categories: only show enabled categories that have videos
+  const categories = videoCategories
+    .filter(cat => cat.enabled !== false) // Show only enabled categories
+    .filter(cat => projects.some(p => p.category === cat.id)); // Only show categories with videos
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === activeFilter);
+  const filteredProjects = projects.filter(p => p.category === activeFilter);
 
   const handlePlay = (project) => {
     setSelectedVideo(project);

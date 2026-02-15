@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Navbar.css';
-import logo from '../assets/mylogot.png';
+import logo from '../assets/mylogotr.png';
 
 const Navbar = ({ videoOpen = false }) => {
   const [scrolled, setScrolled] = useState(false);
