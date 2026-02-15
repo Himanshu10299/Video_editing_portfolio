@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import './Services.css';
 
 const Services = () => {
@@ -35,49 +34,8 @@ const Services = () => {
     }
   ];
 
+  // Double the items for seamless looping
   const loopedServices = [...services, ...services];
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
-    let frameId;
-    let last = performance.now();
-    let half = container.scrollWidth / 2;
-    if (!half) return;
-
-    const updateMetrics = () => {
-      half = container.scrollWidth / 2;
-      if (!half) return;
-      // keep position within loop after resize
-      container.scrollLeft = container.scrollLeft % half;
-    };
-
-    const pxPerSec = 18; // smoother pace
-
-    const tick = (now) => {
-      const dt = (now - last) / 1000;
-      last = now;
-      if (!half) {
-        updateMetrics();
-      }
-      const wrapWidth = half || 1;
-      const next = container.scrollLeft + pxPerSec * dt;
-      const wrapped = next >= wrapWidth ? next - wrapWidth : next < 0 ? next + wrapWidth : next;
-      container.scrollLeft = wrapped;
-      frameId = requestAnimationFrame(tick);
-    };
-
-    updateMetrics();
-    frameId = requestAnimationFrame(tick);
-    window.addEventListener('resize', updateMetrics);
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.removeEventListener('resize', updateMetrics);
-    };
-  }, []);
 
   return (
     <section id="services" className="services">
@@ -90,28 +48,18 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="services-grid" ref={scrollRef}>
-          {loopedServices.map((service, index) => (
-            <div
-              key={`${service.title}-${index}`}
-              className="service-card"
-              style={{ animationDelay: `${(index % services.length) * 0.1}s` }}
-            >
-              <div className="service-icon">{service.icon}</div>
-              <h3 className="service-title">{service.title}</h3>
-              <p className="service-description">{service.description}</p>
-              <ul className="service-features">
-                {service.features.map((feature, i) => (
-                  <li key={i}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="services-carousel">
+          <div className="services-track">
+            {loopedServices.map((service, index) => (
+              <div
+                key={`${service.title}-${index}`}
+                className="service-card"
+              >
+                <div className="service-icon">{service.icon}</div>
+                <h3 className="service-title">{service.title}</h3>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="process-section">
