@@ -45,9 +45,9 @@ const Hero = () => {
         </div>
         
         <h1 className="hero-title">
-          <span className="title-line">Crafting</span>
-          <span className="title-line highlight">Cinematic</span>
-          <span className="title-line">Stories</span>
+          <span className="title-line">Attention</span>
+          <span className="title-line highlight">isn't give</span>
+          <span className="title-line">Its Edited.</span>
         </h1>
         
         <p className="hero-subtitle">
@@ -83,6 +83,7 @@ const Hero = () => {
           </div>
         )}
       </div>
+      <div className="hero-transition" aria-hidden="true"></div>
       
       <div className="scroll-indicator">
         <div className="mouse">
