@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './Navbar.css';
 import logo from '../assets/mylogo.png';
 
-const Navbar = () => {
+const Navbar = ({ videoOpen = false }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${videoOpen ? 'hidden' : ''}`}>
       <div className="navbar-container">
         <a href="#" className="logo">
           <img src={logo} alt="Logo" className="logo-image" />

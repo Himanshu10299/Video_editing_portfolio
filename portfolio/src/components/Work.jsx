@@ -1,8 +1,9 @@
 import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { processYouTubeVideos, videoCategories } from '../data/workData';
 import './Work.css';
 
-const Work = () => {
+const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -19,6 +20,26 @@ const Work = () => {
     };
     loadVideos();
   }, []);
+
+  // Cleanup: restore scroll when component unmounts
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && selectedVideo) {
+        setSelectedVideo(null);
+        document.body.style.overflow = 'unset';
+        onVideoClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [selectedVideo, onVideoClose]);
 
   const handleFilterChange = (filterId) => {
     if (typeof window !== 'undefined') {
@@ -40,9 +61,17 @@ const Work = () => {
 
   const handlePlay = (project) => {
     setSelectedVideo(project);
+    onVideoOpen();
+    // Lock body scroll when video opens
+    document.body.style.overflow = 'hidden';
   };
 
-  const closeModal = () => setSelectedVideo(null);
+  const closeModal = () => {
+    setSelectedVideo(null);
+    onVideoClose();
+    // Restore body scroll
+    document.body.style.overflow = 'unset';
+  };
 
   return (
     <section id="work" className="work">
@@ -55,6 +84,7 @@ const Work = () => {
           </p>
         </div>
 
+          onVideoClose();
         <div className="work-content">
           {/* Filter Sidebar */}
           <aside className="filter-sidebar">
@@ -129,10 +159,9 @@ const Work = () => {
             )}
           </div>
         </div>
-        {selectedVideo && (
+        {selectedVideo && createPortal(
           <div className="video-modal" onClick={closeModal}>
             <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-              <button className="video-modal-close" onClick={closeModal} aria-label="Close video">×</button>
               <div className="video-responsive">
                 <iframe
                   src={`${selectedVideo.embedUrl}?autoplay=1`}
@@ -141,12 +170,10 @@ const Work = () => {
                   allowFullScreen
                 />
               </div>
-              <div className="video-modal-meta">
-                <h3>{selectedVideo.title}</h3>
-                <p>{selectedVideo.description}</p>
-              </div>
+              <button className="video-modal-close" onClick={closeModal} aria-label="Close video">Close</button>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </div>
     </section>

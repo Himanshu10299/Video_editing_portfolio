@@ -4,9 +4,9 @@
 
 export const youtubeVideos = [
   {
-    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    url: "https://youtu.be/dyUf5DqRNEY?si=iMPV0ecYZOb1Bghf",
     category: "music",
-    tags: ["Music Video", "Classic", "interesting"]
+    tags: ["Game", "Memes"]
   },
   {
     url: "https://www.youtube.com/watch?v=9bZkp7q19f0",

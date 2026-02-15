@@ -396,42 +396,44 @@
 .video-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 10000;
   padding: 1.5rem;
+  overflow-y: auto;
 }
 
 .video-modal-content {
   background: #0f0f0f;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: min(900px, 100%);
+  width: min(1100px, 95vw);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   position: relative;
-  padding: 1.5rem;
+  padding: 1rem;
+  z-index: 10001;
 }
 
 .video-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  align-self: flex-end;
+  margin-top: 0.75rem;
+  padding: 0.65rem 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
   color: #fff;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 0.95rem;
   line-height: 1;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .video-modal-close:hover {
-  background: rgba(255, 120, 40, 0.4);
+  background: rgba(255, 120, 40, 0.25);
+  border-color: rgba(255, 120, 40, 0.6);
+  transform: translateY(-1px);
 }
 
 .video-responsive {
@@ -441,7 +443,6 @@
   border-radius: 12px;
   overflow: hidden;
   background: #000;
-  margin-bottom: 1rem;
 }
 
 .video-responsive iframe {
