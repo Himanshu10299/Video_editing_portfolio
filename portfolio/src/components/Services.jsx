@@ -1,44 +1,83 @@
+import { useEffect, useRef } from 'react';
 import './Services.css';
 
 const Services = () => {
   const services = [
     {
       icon: '🎬',
-      title: 'Video Editing',
-      description: 'Professional video editing with seamless transitions, color grading, and sound design that brings your vision to life.',
-      features: ['Color Grading', 'Sound Design', 'Transitions', 'Visual Effects']
+      title: 'Long-Form Video Editing',
+      description: 'Feature-length and series edits with deliberate pacing, polished grading, and cohesive storytelling.',
+      features: ['Narrative Pacing', 'Color Grading', 'Sound Design', 'B-roll Integration']
     },
     {
-      icon: '✨',
-      title: 'Motion Graphics',
-      description: 'Eye-catching animated graphics, titles, and visual effects that enhance your storytelling.',
-      features: ['2D/3D Animation', 'Logo Animation', 'Typography', 'Infographics']
+      icon: '📽️',
+      title: 'Documentary Editing',
+      description: 'Interview-driven narratives with thoughtful structure, archival integration, and emotional resonance.',
+      features: ['Interview Editing', 'Story Structure', 'Archival Integration', 'Sound Mixing']
     },
     {
-      icon: '🎵',
-      title: 'Music Videos',
-      description: 'Dynamic music video editing synchronized to the beat with creative visual effects and transitions.',
-      features: ['Beat Sync', 'Creative Effects', 'Color Grading', 'Performance Editing']
+      icon: '🎧',
+      title: 'Podcast Editing',
+      description: 'Clean, engaging podcasts with crisp audio, synced visuals, and social-ready cutdowns.',
+      features: ['Audio Cleanup', 'Multi-cam Sync', 'Dynamic Captions', 'Social Cutdowns']
     },
     {
-      icon: '🎯',
-      title: 'Social Media Content',
-      description: 'Short-form content optimized for social platforms with captions, graphics, and engaging edits.',
-      features: ['Fast-paced Editing', 'Captions', 'Format Optimization', 'Engagement Hooks']
+      icon: '🧊',
+      title: '3D Production',
+      description: 'Stylized 3D assets, animation, and compositing that add depth and polish to your visuals.',
+      features: ['Modeling & Texturing', 'Animation', 'Compositing', 'Render Optimization']
     },
     {
-      icon: '🎪',
-      title: 'Commercial & Brand',
-      description: 'High-end commercial editing that showcases your products and services with cinematic quality.',
-      features: ['Product Showcase', 'Brand Storytelling', 'High-end Finishing', 'Professional Quality']
-    },
-    {
-      icon: '📹',
-      title: 'Documentary',
-      description: 'Compelling documentary editing with narrative structure, interviews, and emotional storytelling.',
-      features: ['Interview Editing', 'Narrative Structure', 'Archival Integration', 'Sound Mixing']
+      icon: '🎮',
+      title: 'Gaming Videos',
+      description: 'High-energy edits for streams and highlights with punchy motion graphics and beat-synced cuts.',
+      features: ['Highlight Reels', 'Callouts & Overlays', 'Beat-synced Cuts', 'Engagement Hooks']
     }
   ];
+
+  const loopedServices = [...services, ...services];
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    let frameId;
+    let last = performance.now();
+    let half = container.scrollWidth / 2;
+    if (!half) return;
+
+    const updateMetrics = () => {
+      half = container.scrollWidth / 2;
+      if (!half) return;
+      // keep position within loop after resize
+      container.scrollLeft = container.scrollLeft % half;
+    };
+
+    const pxPerSec = 18; // smoother pace
+
+    const tick = (now) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      if (!half) {
+        updateMetrics();
+      }
+      const wrapWidth = half || 1;
+      const next = container.scrollLeft + pxPerSec * dt;
+      const wrapped = next >= wrapWidth ? next - wrapWidth : next < 0 ? next + wrapWidth : next;
+      container.scrollLeft = wrapped;
+      frameId = requestAnimationFrame(tick);
+    };
+
+    updateMetrics();
+    frameId = requestAnimationFrame(tick);
+    window.addEventListener('resize', updateMetrics);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('resize', updateMetrics);
+    };
+  }, []);
 
   return (
     <section id="services" className="services">
@@ -51,12 +90,12 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="services-grid">
-          {services.map((service, index) => (
-            <div 
-              key={index} 
+        <div className="services-grid" ref={scrollRef}>
+          {loopedServices.map((service, index) => (
+            <div
+              key={`${service.title}-${index}`}
               className="service-card"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ animationDelay: `${(index % services.length) * 0.1}s` }}
             >
               <div className="service-icon">{service.icon}</div>
               <h3 className="service-title">{service.title}</h3>
