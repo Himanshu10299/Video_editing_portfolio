@@ -65,20 +65,23 @@ const Hero = () => {
           </a>
         </div>
         
-        <div className="hero-stats">
-          <div className="stat">
-            <h3>500+</h3>
-            <p>Projects Delivered</p>
+        {/* Temporarily hide hero stats to lighten the section */}
+        {false && (
+          <div className="hero-stats">
+            <div className="stat">
+              <h3>500+</h3>
+              <p>Projects Delivered</p>
+            </div>
+            <div className="stat">
+              <h3>5+ Years</h3>
+              <p>Experience</p>
+            </div>
+            <div className="stat">
+              <h3>100+</h3>
+              <p>Happy Clients</p>
+            </div>
           </div>
-          <div className="stat">
-            <h3>5+ Years</h3>
-            <p>Experience</p>
-          </div>
-          <div className="stat">
-            <h3>100+</h3>
-            <p>Happy Clients</p>
-          </div>
-        </div>
+        )}
       </div>
       
       <div className="scroll-indicator">
