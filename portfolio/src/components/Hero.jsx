@@ -46,7 +46,7 @@ const Hero = () => {
         
         <h1 className="hero-title">
           <span className="title-line">Attention</span>
-          <span className="title-line highlight">isn't give</span>
+          <span className="title-line highlight">isn't given</span>
           <span className="title-line">Its Edited.</span>
         </h1>
         
