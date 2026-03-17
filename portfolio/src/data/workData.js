@@ -72,19 +72,29 @@ export const youtubeVideos = [
     //     tags: ["faceless", "Documentary"]
     // },
     {
+      url: "https://youtu.be/Z_LsVsXpgv0?si=AQb0EVUKIB8iY-Wo",
+      category: "Long form",
+      tags: ["Tutorial"]
+    },
+    {
+      url: "https://youtu.be/F6_lHN9fASM",
+      category: "Long form",
+      tags: ["faceless", "Documentary"]
+    },
+    {
+      url: "https://youtu.be/dyUf5DqRNEY?si=iMPV0ecYZOb1Bghf",
+      category: "Long form",
+      tags: ["Game", "Memes"]
+    },
+    {
+      url: "https://youtu.be/iycAMrqCjwQ?si=SJI77drOzoHs_MG0",
+      category: "Long form",
+      tags: ["Game", "Memes"]
+    },
+    {
         url: "https://youtu.be/qS-VXEbQUoI",
         category: "Long form",
         tags: ["Podcast", "Intro"]
-    },
-    {
-        url: "https://youtu.be/F6_lHN9fASM",
-        category: "Long form",
-        tags: ["faceless", "Documentary"]
-    },
-    {
-        url: "https://youtu.be/dyUf5DqRNEY?si=iMPV0ecYZOb1Bghf",
-        category: "Long form",
-        tags: ["Game", "Memes"]
     },
     {
         url: "https://youtu.be/7fu_W8hDCzY",
@@ -109,7 +119,12 @@ export const youtubeVideos = [
   {
     url: "https://youtu.be/iI3fFBAG-b8",
     category: "3D animation",
-    tags: ["Corporate", "Product"]
+    tags: ["Rendering"]
+  },
+  {
+    url: "https://youtu.be/kIRbWg8Qu0E?si=tA7lWu4V9PRW6NoJ",
+    category: "3D animation",
+    tags: ["Physics simulation"]
   },
   {
     url: "https://youtu.be/3JvZNcbtwos",

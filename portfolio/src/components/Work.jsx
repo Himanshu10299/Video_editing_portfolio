@@ -1,11 +1,10 @@
 import { useState, useRef, useLayoutEffect, useEffect, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import { processYouTubeVideos, videoCategories } from '../data/workData';
 import './Work.css';
 
 const VISIBLE_CARDS = 3; // How many stacked cards are visible behind the active one
 
-const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
+const Work = () => {
   const [activeFilter, setActiveFilter] = useState('');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [projects, setProjects] = useState([]);
@@ -35,32 +34,22 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
     loadVideos();
   }, []);
 
-  // Cleanup: restore scroll when component unmounts
-  useEffect(() => {
-    return () => {
-      document.body.style.overflow = 'unset';
-      document.documentElement.style.overflow = 'unset';
-    };
-  }, []);
-
-  // Close modal on Escape key
+  // Stop inline playback on Escape key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && selectedVideo) {
         setSelectedVideo(null);
-        document.body.style.overflow = 'unset';
-        document.documentElement.style.overflow = 'unset';
-        onVideoClose();
       }
     };
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
-  }, [selectedVideo, onVideoClose]);
+  }, [selectedVideo]);
 
   const handleFilterChange = (filterId) => {
     if (typeof window !== 'undefined') {
       preservedScrollRef.current = window.scrollY;
     }
+    setSelectedVideo(null);
     setActiveFilter(filterId);
     setCurrentIndex(0); // Reset to first card on filter change
   };
@@ -78,20 +67,15 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
 
   const handlePlay = (project) => {
     setSelectedVideo(project);
-    onVideoOpen();
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
   };
 
-  const closeModal = () => {
+  const closeInlinePlayer = () => {
     setSelectedVideo(null);
-    onVideoClose();
-    document.body.style.overflow = 'unset';
-    document.documentElement.style.overflow = 'unset';
   };
 
   const goNext = useCallback(() => {
     if (isAnimating || currentIndex >= filteredProjects.length - 1) return;
+    setSelectedVideo(null);
     setIsAnimating(true);
     setCurrentIndex(prev => prev + 1);
     setTimeout(() => setIsAnimating(false), 500);
@@ -99,6 +83,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
 
   const goPrev = useCallback(() => {
     if (isAnimating || currentIndex <= 0) return;
+    setSelectedVideo(null);
     setIsAnimating(true);
     setCurrentIndex(prev => prev - 1);
     setTimeout(() => setIsAnimating(false), 500);
@@ -107,7 +92,6 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
   // Keyboard navigation
   useEffect(() => {
     const handleKey = (e) => {
-      if (selectedVideo) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault();
         goNext();
@@ -119,7 +103,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [selectedVideo, goNext, goPrev]);
+  }, [goNext, goPrev]);
 
   // Get card style based on position in stack
   const getCardStyle = (index) => {
@@ -236,6 +220,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
                   <div className="card-stack" style={{ height: 'clamp(260px, 32vw, 400px)' }}>
                     {filteredProjects.map((project, index) => {
                       const style = getCardStyle(index);
+                      const isPlaying = selectedVideo?.id === project.id;
                       return (
                         <div
                           key={project.id}
@@ -249,24 +234,44 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
                             width: '100%',
                           }}
                         >
-                          <div className="stack-card-thumbnail" onClick={() => handlePlay(project)}>
-                            <img src={project.thumbnail} alt={project.title} />
-                            <div className="stack-card-overlay">
-                              <button className="play-button" onClick={(e) => { e.stopPropagation(); handlePlay(project); }}>
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                                  <path d="M8 5.14v14.72L19 12 8 5.14z" fill="currentColor"/>
-                                </svg>
-                              </button>
-                            </div>
-                            {/* Bottom info bar on the thumbnail */}
-                            <div className="stack-card-info">
-                              <h3 className="stack-card-title">{project.title}</h3>
-                              <div className="stack-card-tags">
-                                {project.tags.map((tag, i) => (
-                                  <span key={i} className="tag">{tag}</span>
-                                ))}
+                          <div className="stack-card-thumbnail">
+                            {isPlaying ? (
+                              <div className="video-responsive inline-video-player">
+                                <iframe
+                                  src={`${project.embedUrl}?autoplay=1&rel=0`}
+                                  title={project.title}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                />
+                                <button
+                                  className="inline-video-close"
+                                  onClick={closeInlinePlayer}
+                                  aria-label="Close video"
+                                >
+                                  Close
+                                </button>
                               </div>
-                            </div>
+                            ) : (
+                              <>
+                                <img src={project.thumbnail} alt={project.title} />
+                                <div className="stack-card-overlay">
+                                  <button className="play-button" onClick={(e) => { e.stopPropagation(); handlePlay(project); }}>
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                      <path d="M8 5.14v14.72L19 12 8 5.14z" fill="currentColor"/>
+                                    </svg>
+                                  </button>
+                                </div>
+                                {/* Bottom info bar on the thumbnail */}
+                                <div className="stack-card-info">
+                                  <h3 className="stack-card-title">{project.title}</h3>
+                                  <div className="stack-card-tags">
+                                    {project.tags.map((tag, i) => (
+                                      <span key={i} className="tag">{tag}</span>
+                                    ))}
+                                  </div>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
                       );
@@ -307,6 +312,7 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
                         className={`stack-dot ${i === currentIndex ? 'active' : ''}`}
                         onClick={() => {
                           if (!isAnimating) {
+                            setSelectedVideo(null);
                             setIsAnimating(true);
                             setCurrentIndex(i);
                             setTimeout(() => setIsAnimating(false), 500);
@@ -332,22 +338,6 @@ const Work = ({ onVideoOpen = () => {}, onVideoClose = () => {} }) => {
             )}
           </div>
         </div>
-        {selectedVideo && createPortal(
-          <div className="video-modal" onClick={closeModal}>
-            <div className="video-modal-content" onClick={(e) => e.stopPropagation()}>
-              <div className="video-responsive">
-                <iframe
-                  src={`${selectedVideo.embedUrl}?autoplay=1`}
-                  title={selectedVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-              <button className="video-modal-close" onClick={closeModal} aria-label="Close video">Close</button>
-            </div>
-          </div>,
-          document.body
-        )}
       </div>
     </section>
   );
