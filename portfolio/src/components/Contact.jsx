@@ -9,6 +9,8 @@ const Contact = () => {
     budget: '',
     message: ''
   });
+  
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
 
   const handleChange = (e) => {
     setFormData({
@@ -17,11 +19,37 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you! I will get back to you soon.');
+    try {
+      const response = await fetch(import.meta.env.VITE_FORMSPREE_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setFormStatus({ type: 'success', message: 'Thank you! I will get back to you soon.' });
+        setFormData({
+          name: '',
+          email: '',
+          projectType: '',
+          budget: '',
+          message: ''
+        });
+        setTimeout(() => setFormStatus({ type: '', message: '' }), 5000);
+      } else {
+        setFormStatus({ type: 'error', message: 'Oops! There was a problem submitting your form.' });
+        setTimeout(() => setFormStatus({ type: '', message: '' }), 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormStatus({ type: 'error', message: 'Oops! There was a problem submitting your form.' });
+      setTimeout(() => setFormStatus({ type: '', message: '' }), 5000);
+    }
   };
 
   return (
@@ -168,6 +196,12 @@ const Contact = () => {
                 placeholder="Tell me about your project..."
               ></textarea>
             </div>
+
+            {formStatus.message && (
+              <div className={`form-status ${formStatus.type}`}>
+                {formStatus.message}
+              </div>
+            )}
 
             <button type="submit" className="submit-button">
               Send Message
