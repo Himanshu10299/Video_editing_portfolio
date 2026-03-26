@@ -7,44 +7,44 @@
 // You can add new categories or remove existing ones
 
 export const videoCategories = [
-  { 
-    id: 'Long form', 
+  {
+    id: 'Long form',
     label: 'Long form',
     enabled: true,
     description: 'Long form videeo'
   },
-  { 
-    id: 'Short form', 
+  {
+    id: 'Short form',
     label: 'Short form',
     enabled: true,
     description: 'Short form video'
   },
-  { 
-    id: '3D animation', 
+  {
+    id: '3D animation',
     label: '3D Animation',
     enabled: true,
     description: '3D animated content'
   },
-  { 
-    id: '2D animation', 
+  {
+    id: '2D animation',
     label: '2D Animation',
-    enabled: true, 
+    enabled: true,
     description: '2D animated content'
   },
-  { 
-    id: 'documentary', 
+  {
+    id: 'documentary',
     label: 'Documentary',
     enabled: false, // Disabled - won't show in UI
     description: 'Documentary productions'
   },
-  { 
-    id: 'social', 
+  {
+    id: 'social',
     label: 'Social Media',
     enabled: false, // Disabled - won't show in UI
     description: 'Content for social platforms'
   },
-  { 
-    id: 'motion', 
+  {
+    id: 'motion',
     label: 'Motion Graphics',
     enabled: false, // Disabled - won't show in UI
     description: 'Animated graphics and titles'
@@ -61,60 +61,55 @@ export const videoCategories = [
 // (Only enabled categories from the configuration above will show in the UI)
 
 export const youtubeVideos = [
-    {
+  {
+    url: "https://youtu.be/MjUw8gqoxGQ",
+    category: "Long form",
+    tags: ["Tech", "Review"]
+  },
+  {
+    url: "https://youtu.be/dyUf5DqRNEY?si=iMPV0ecYZOb1Bghf",
+    category: "Long form",
+    tags: ["Game", "Memes"]
+  },
+  {
     url: "https://youtu.be/pPvP5rEGJPg",
     category: "Long form",
-    tags: ["3D" ,"VFX" ]
+    tags: ["3D", "VFX"]
   },
   // {
-    //     url: "https://youtu.be/SrMWqhGbMQ0",
-    //     category: "Long form",
-    //     tags: ["faceless", "Documentary"]
-    // },
-    {
-      url: "https://youtu.be/Z_LsVsXpgv0?si=AQb0EVUKIB8iY-Wo",
-      category: "Long form",
-      tags: ["Tutorial"]
-    },
-    {
-      url: "https://youtu.be/F6_lHN9fASM",
-      category: "Long form",
-      tags: ["faceless", "Documentary"]
-    },
-    {
-      url: "https://youtu.be/dyUf5DqRNEY?si=iMPV0ecYZOb1Bghf",
-      category: "Long form",
-      tags: ["Game", "Memes"]
-    },
-    {
-      url: "https://youtu.be/iycAMrqCjwQ?si=SJI77drOzoHs_MG0",
-      category: "Long form",
-      tags: ["Game", "Memes"]
-    },
-    {
-        url: "https://youtu.be/qS-VXEbQUoI",
-        category: "Long form",
-        tags: ["Podcast", "Intro"]
-    },
-    {
-        url: "https://youtu.be/7fu_W8hDCzY",
-        category: "Long form",
-        tags: ["2D", "Animation "]
-    },
-    {
+  //     url: "https://youtu.be/SrMWqhGbMQ0",
+  //     category: "Long form",
+  //     tags: ["faceless", "Documentary"]
+  // },
+  {
+    url: "https://youtu.be/Z_LsVsXpgv0?si=AQb0EVUKIB8iY-Wo",
+    category: "Long form",
+    tags: ["Tutorial"]
+  },
+  {
+    url: "https://youtu.be/F6_lHN9fASM",
+    category: "Long form",
+    tags: ["faceless", "Documentary"]
+  },
+  {
+    url: "https://youtu.be/iycAMrqCjwQ?si=SJI77drOzoHs_MG0",
+    category: "Long form",
+    tags: ["Game", "Memes"]
+  },
+  {
     url: "https://youtube.com/shorts/f7nxvhi1clU",
     category: "Short form",
     tags: ["Daily life"]
   },
   {
-      url: "https://youtu.be/gXUDIr_vdqM",
-      category: "Short form",
-      tags: ["faceless", "Documentary"]
+    url: "https://youtu.be/gXUDIr_vdqM",
+    category: "Short form",
+    tags: ["faceless", "Documentary"]
   },
   {
-      url: "https://youtube.com/shorts/Xc4UUgsfvtg?feature=share",
-      category: "Short form",
-      tags: ["faceless", "Documentary"]
+    url: "https://youtube.com/shorts/Xc4UUgsfvtg?feature=share",
+    category: "Short form",
+    tags: ["faceless", "Documentary"]
   },
   {
     url: "https://youtu.be/iI3fFBAG-b8",
@@ -136,16 +131,21 @@ export const youtubeVideos = [
     category: "3D animation",
     tags: ["Corporate", "Product"]
   },
-   {
-        url: "https://youtu.be/EAC2gQ3D-kc",
-        category: "2D animation",
-        tags: ["faceless", "Documentary"]
-    },
-     {
-        url: "https://youtu.be/vlYJ5FiZ_Fs",
-        category: "2D animation",
-        tags: ["faceless", "Documentary"]
-    },
+  {
+    url: "https://youtu.be/7fu_W8hDCzY",
+    category: "2D animation",
+    tags: ["2D", "Animation "]
+  },
+  {
+    url: "https://youtu.be/vlYJ5FiZ_Fs",
+    category: "2D animation",
+    tags: ["2D"]
+  },
+  {
+    url: "https://youtu.be/EAC2gQ3D-kc",
+    category: "2D animation",
+    tags: ["2D"]
+  },
   // Add more videos here with format:
   // { url: "YOUR_YOUTUBE_URL", category: "category_id", tags: ["Tag1", "Tag2"] }
 ];
@@ -160,7 +160,7 @@ export const extractVideoId = (url) => {
   const shortsRegex = /youtube\.com\/shorts\/([^"&?\/\s]{11})/;
   const shortsMatch = url.match(shortsRegex);
   if (shortsMatch) return shortsMatch[1];
-  
+
   // Handle regular YouTube URLs
   const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const match = url.match(regex);
@@ -197,13 +197,13 @@ export const processYouTubeVideos = async () => {
       const url = typeof video === 'string' ? video : video.url;
       const category = typeof video === 'object' ? video.category : 'all';
       const tags = typeof video === 'object' && video.tags ? video.tags : ['Video Editing'];
-      
+
       const videoId = extractVideoId(url);
       if (!videoId) return null;
-      
+
       // Fetch the actual title from YouTube
       const title = await fetchYouTubeTitle(videoId);
-      
+
       return {
         id: index + 1,
         title: title,
@@ -218,6 +218,6 @@ export const processYouTubeVideos = async () => {
       };
     })
   );
-  
+
   return processedVideos.filter(Boolean);
 };
