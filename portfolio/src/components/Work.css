@@ -1,6 +1,6 @@
 .work {
   padding: 5rem 2rem 6rem;
-  background: #0a0a0a;
+  background: #000000;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -14,7 +14,7 @@
   transform: translate(-50%, -50%);
   width: 1000px;
   height: 1000px;
-  background: radial-gradient(circle, rgba(255, 120, 40, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -35,22 +35,22 @@
 .section-tag {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 120, 40, 0.2), rgba(255, 80, 20, 0.2));
-  border: 1px solid rgba(255, 120, 40, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #ffa366;
+  color: #a1a1a6;
   margin-bottom: 1rem;
-  text-transform: uppercase;
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500;
   letter-spacing: 1px;
 }
 
 .section-title {
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff, #f5f5f0);
+  background: none;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,10 +90,10 @@
 .filter-title {
   font-size: 0.85rem;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500;
   opacity: 0.6;
   margin-bottom: 1.25rem;
-  color: #f5f5f0;
+  color: #f5f5f7;
 }
 
 .filter-list {
@@ -118,15 +118,15 @@
 }
 
 .filter-item:hover {
-  background: rgba(255, 120, 40, 0.05);
-  border-color: rgba(255, 120, 40, 0.3);
-  color: #ffa366;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #a1a1a6;
 }
 
 .filter-item.active {
-  background: linear-gradient(135deg, rgba(255, 120, 40, 0.15), rgba(255, 80, 20, 0.15));
-  border-color: rgba(255, 120, 40, 0.5);
-  color: #ffa366;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #a1a1a6;
   font-weight: 600;
 }
 
@@ -141,11 +141,11 @@
   min-width: 24px;
   height: 24px;
   padding: 0 8px;
-  background: rgba(255, 120, 40, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   font-size: 0.8rem;
   font-weight: 700;
-  color: #ffa366;
+  color: #a1a1a6;
 }
 
 /* Projects Wrapper */
@@ -171,8 +171,8 @@
 
 .stack-counter-current {
   font-size: 1.5rem;
-  font-weight: 800;
-  color: #ff7828;
+  font-weight: 700;
+  color: #ffffff;
   line-height: 1;
 }
 
@@ -226,9 +226,9 @@
 }
 
 .stack-nav-arrow:hover:not(.disabled) {
-  background: rgba(255, 120, 40, 0.2);
-  border-color: rgba(255, 120, 40, 0.5);
-  color: #ff7828;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -263,11 +263,11 @@
 }
 
 .stack-card--active {
-  border-color: rgba(255, 120, 40, 0.25);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow: 
     0 8px 40px rgba(0, 0, 0, 0.5),
-    0 0 60px rgba(255, 120, 40, 0.08),
-    0 0 0 1px rgba(255, 120, 40, 0.15);
+    0 0 60px rgba(255, 255, 255, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .inline-video-player {
@@ -291,8 +291,8 @@
 }
 
 .inline-video-close:hover {
-  background: rgba(255, 120, 40, 0.25);
-  border-color: rgba(255, 120, 40, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .stack-card-thumbnail {
@@ -338,18 +338,18 @@
   justify-content: center;
   width: 72px;
   height: 72px;
-  background: linear-gradient(135deg, #ff7828 0%, #ff5014 100%);
+  background: none;
   color: white;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 30px rgba(255, 120, 40, 0.5);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
 }
 
 .play-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 12px 40px rgba(255, 120, 40, 0.7);
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.1);
 }
 
 .play-button svg {
@@ -394,11 +394,11 @@
 
 .tag {
   padding: 0.3rem 0.75rem;
-  background: rgba(255, 120, 40, 0.2);
-  border: 1px solid rgba(255, 120, 40, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   font-size: 0.75rem;
-  color: #ffa366;
+  color: #a1a1a6;
   font-weight: 500;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -430,9 +430,9 @@
 }
 
 .stack-nav-btn:hover:not(.disabled) {
-  background: rgba(255, 120, 40, 0.15);
-  border-color: rgba(255, 120, 40, 0.5);
-  color: #ff7828;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   transform: scale(1.05);
 }
 
@@ -466,15 +466,15 @@
 }
 
 .stack-dot:hover {
-  background: rgba(255, 120, 40, 0.4);
+  background: rgba(255, 255, 255, 0.1);
   transform: scale(1.2);
 }
 
 .stack-dot.active {
-  background: #ff7828;
+  background: #ffffff;
   width: 28px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(255, 120, 40, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 /* ========================================
@@ -505,8 +505,8 @@
 .loading-spinner {
   width: 48px;
   height: 48px;
-  border: 4px solid rgba(255, 120, 40, 0.2);
-  border-top-color: #ff7828;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #ffffff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -765,7 +765,7 @@
 .grid-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 120, 40, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .card-thumbnail {
@@ -841,7 +841,7 @@
 
 /* Adjust Play Button for Grid */
 .grid-card .play-btn {
-  background: rgba(255, 120, 40, 0.9);
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   width: 50px;
   height: 50px;
@@ -858,7 +858,8 @@
 
 .grid-card:hover .play-btn {
   transform: scale(1.1);
-  background: rgba(255, 140, 60, 1);
+  background: rgba(255, 255, 255, 0.9);
+  color: #000000;
 }
 
 .video-responsive {
@@ -908,4 +909,7 @@
     transform: scale(1) translateY(0);
   }
 }
+
+
+
 
