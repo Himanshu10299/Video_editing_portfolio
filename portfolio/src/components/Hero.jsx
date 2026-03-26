@@ -2,94 +2,51 @@ import { useEffect, useRef, useState } from 'react';
 import './Hero.css';
 
 const Hero = () => {
-  const textRef = useRef(null);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    if (textRef.current) {
-      observer.observe(textRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <section className="hero">
-      <div className="hero-background">
-        <div className="gradient-orb orb-1"></div>
-        <div className="gradient-orb orb-2"></div>
-        <div className="gradient-orb orb-3"></div>
-      </div>
-      
-      <div className="hero-content" ref={textRef}>
-        <div className={`hero-badge ${scrolled ? 'scrolled' : ''}`}>
-          <span className="badge-dot"></span>
-          Available for Freelance
-        </div>
-        
-        <h1 className="hero-title">
-          <span className="title-line">Attention</span>
-          <span className="title-line highlight">isn't given</span>
-          <span className="title-line">Its Edited.</span>
-        </h1>
-        
-        <p className="hero-subtitle">
-          Video editing that transforms raw footage into compelling narratives.
-          <br />
-          Where every frame tells a story and every cut creates emotion.
-        </p>
-        
-        <div className="hero-cta">
-          <a href="#work" className="btn btn-primary">
-            View My Work
-          </a>
-          <a href="#contact" className="btn btn-secondary">
-            Let's Collaborate
-          </a>
-        </div>
-        
-        {/* Temporarily hide hero stats to lighten the section */}
-        {false && (
-          <div className="hero-stats">
-            <div className="stat">
-              <h3>500+</h3>
-              <p>Projects Delivered</p>
+      <div className="hero-container">
+        <div className="hero-panel nlm-panel">
+          <div className="hero-content">
+            <div className="section-tag">
+              <span className="badge-dot"></span>
+              Available for Freelance
             </div>
-            <div className="stat">
-              <h3>5+ Years</h3>
-              <p>Experience</p>
-            </div>
-            <div className="stat">
-              <h3>100+</h3>
-              <p>Happy Clients</p>
+            
+            <h1 className="hero-title">
+              Attention isn't given,<br />
+              <span className="highlight">It's Edited.</span>
+            </h1>
+            
+            <p className="hero-subtitle">
+              Professional video editing that transforms raw footage into compelling narratives. 
+              Grounded in storytelling, elevated by precision.
+            </p>
+            
+            <div className="hero-cta">
+              <a href="#work" className="btn-primary-nlm">
+                View Projects
+              </a>
+              <a href="#contact" className="btn-secondary-nlm">
+                Let's Chat
+              </a>
             </div>
           </div>
-        )}
-      </div>
-      <div className="hero-transition" aria-hidden="true"></div>
-      
-      <div className="scroll-indicator">
-        <div className="mouse">
-          <div className="wheel"></div>
+          
+          <div className="hero-visual">
+            <div className="visual-card card-1">
+              <div className="card-header"><div className="dot"></div><div className="line"></div></div>
+              <div className="card-body"></div>
+            </div>
+            <div className="visual-card card-2">
+              <div className="card-header"><div className="dot"></div><div className="line"></div></div>
+              <div className="card-body"></div>
+            </div>
+            <div className="visual-card card-3">
+              <div className="card-header"><div className="dot"></div><div className="line"></div></div>
+              <div className="card-body"></div>
+            </div>
+          </div>
         </div>
-        <p>Scroll to explore</p>
       </div>
     </section>
   );

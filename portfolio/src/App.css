@@ -1,7 +1,7 @@
 .app {
   width: 100%;
   min-height: 100vh;
-  background: #000000;
+  background: #ffffff;
   overflow-x: hidden;
 }
 
@@ -16,22 +16,22 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #f7f7f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: none;
+  background: #d7d7d3;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: none;
+  background: #c7c7c2;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(46, 170, 220, 0.2);
+  color: #191919;
 }
 
 /* Remove default margins */

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -7,13 +7,22 @@
 }
 
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color-scheme: light;
 
-  color-scheme: dark;
-  color: #f5f5f7;
-  background-color: #000000;
+  /* NotebookLM Color Palette */
+  --nlm-bg: #f8fafd; /* Very light blue/gray background */
+  --nlm-surface: #ffffff; /* White cards/panels */
+  --nlm-surface-muted: #f0f4f9; /* Subtle gray-blue for buttons/tags */
+  --nlm-accent: #1a73e8; /* Google blue for highlights */
+  --nlm-text: #1f1f1f; /* Darker near-black for readability */
+  --nlm-text-muted: #444746; /* Mid-gray for secondary text */
+  --nlm-border: #e0e2e6; /* Thin borders for panels */
+  --nlm-hover: #e1e3e1; /* Subtle hover state */
+  --nlm-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --nlm-panel-radius: 18px; /* Classic large rounded corners */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,12 +30,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #000000;
-  color: #f5f5f7;
+  background: var(--nlm-bg);
+  color: var(--nlm-text);
   overflow-x: hidden;
 }
 
@@ -35,18 +47,26 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.15;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.25;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.0125em;
+  color: var(--nlm-text);
 }
 
 a {
-  color: inherit;
+  color: var(--nlm-accent);
   text-decoration: none;
 }
 
-button {
+button,
+input,
+textarea {
   font-family: inherit;
 }
 
@@ -56,9 +76,104 @@ img {
   display: block;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Global Section Structure */
+.section {
+  padding: 80px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+.nlm-panel {
+  background: var(--nlm-surface);
+  border: 1px solid var(--nlm-border);
+  border-radius: var(--nlm-panel-radius);
+  box-shadow: var(--nlm-shadow);
+  overflow: hidden;
+}
 
+.section-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--nlm-surface-muted);
+  color: var(--nlm-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--nlm-text);
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--nlm-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--nlm-accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(26, 115, 232, 0.1);
+  color: var(--nlm-text);
+}
+
+body {
+  background:
+    radial-gradient(1300px 700px at 10% -10%, #eaf0ff 0%, transparent 55%),
+    radial-gradient(1000px 600px at 100% 0%, #f3f7ff 0%, transparent 45%),
+    var(--nlm-bg);
+  color: var(--nlm-text);
+}
+
+.hero,
+.work,
+.services,
+.contact,
+.footer {
+  position: relative;
+}
+
+.hero::before,
+.work::before,
+.services::before,
+.contact::before,
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.section-tag {
+  border-radius: 999px;
+  background: var(--nlm-surface-muted);
+  border-color: var(--nlm-border);
+  color: var(--nlm-accent);
+  font-weight: 600;
+}
+
+.section-title {
+  letter-spacing: -0.025em;
+}
+
+.section-subtitle {
+  color: var(--nlm-text-muted);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--nlm-accent);
+}

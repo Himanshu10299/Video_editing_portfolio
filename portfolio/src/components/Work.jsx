@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { processYouTubeVideos, videoCategories } from '../data/workData';
 import './Work.css';
 
@@ -7,7 +7,6 @@ const Work = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const preservedScrollRef = useRef(0);
 
   // Fetch YouTube videos on mount
   useEffect(() => {
@@ -72,97 +71,85 @@ const Work = () => {
 
   return (
     <section id="work" className="work">
+      <div className="section-header">
+        <span className="section-tag">Resources</span>
+        <h2 className="section-title">Project Sources</h2>
+        <p className="section-subtitle">
+          Select a category to view grounded work samples.
+        </p>
+      </div>
+
       <div className="work-container">
-        <div className="section-header">
-          <span className="section-tag">Portfolio</span>
-          <h2 className="section-title">Explore My Work</h2>
-          <p className="section-subtitle">
-            A selection of projects showcasing various styles and techniques
-          </p>
-        </div>
-        
-        {/* Categories Bar (Top) */}
-        <div className="work-categories-top">
-          <div className="filter-list-horizontal">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                className={`filter-item ${activeFilter === category.id ? 'active' : ''}`}
-                onClick={() => handleFilterChange(category.id)}
-              >
-                <span className="filter-label">{category.label}</span>
-                <span className="filter-count">
-                  {projects.filter(p => p.category === category.id).length}
-                </span>
-              </button>
-            ))}
+        <div className="work-sidebar nlm-panel">
+          <div className="sidebar-group">
+            <h3 className="sidebar-title">Categories</h3>
+            <div className="filter-list">
+              {categories.map(category => (
+                <button
+                  key={category.id}
+                  className={`filter-item ${activeFilter === category.id ? 'active' : ''}`}
+                  onClick={() => handleFilterChange(category.id)}
+                >
+                  <span className="filter-dot"></span>
+                  <span className="filter-label">{category.label}</span>
+                  <span className="filter-count">
+                    {projects.filter(p => p.category === category.id).length}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="work-content-grid">
-          {loading ? (
-            <div className="loading-state">
-              <div className="loading-spinner"></div>
-              <p>Loading videos...</p>
-            </div>
-          ) : filteredProjects.length === 0 ? (
-            <div className="empty-state">
-              <p>No videos yet. Add YouTube links in src/data/workData.js</p>
-            </div>
-          ) : (
-            <div className="projects-grid">
-              {filteredProjects.map((project, index) => {
-                const isPlaying = selectedVideo?.id === project.id;
-                return (
-                  <div 
-                    key={project.id} 
-                    className="grid-card"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    <div className="card-thumbnail">
-                      {isPlaying ? (
-                        <div className="video-responsive inline-video-player">
-                          <iframe
-                            src={`${project.embedUrl}?autoplay=1&rel=0`}
-                            title={project.title}
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                          <button
-                            className="inline-video-close close-player-btn"
-                            onClick={closeInlinePlayer}
-                            aria-label="Close video"
-                            style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 10 }}
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ) : (
-                        <>
-                          <img src={project.thumbnail} alt={project.title} />
-                          <div className="card-overlay" onClick={(e) => { e.stopPropagation(); handlePlay(project); }}>
-                            <button className="play-btn" aria-label={`Play ${project.title}`}>
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                              </svg>
-                            </button>
-                            <div className="card-info">
-                              <h3 className="card-title">{project.title}</h3>
-                              <div className="card-tags">
-                                {project.tags.map((tag, i) => (
-                                  <span key={i} className="tag">{tag}</span>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      )}
+        <div className="work-grid">
+          {filteredProjects.map((project) => (
+            <div key={project.id} className="work-card nlm-panel">
+              <div className="card-source-info">
+                <span className="source-icon">📄</span>
+                <span className="source-name">{project.title}</span>
+              </div>
+              
+              <div className="card-video-container">
+                {selectedVideo?.id === project.id ? (
+                  <iframe
+                    className="inline-video-frame"
+                    src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&rel=0`}
+                    title={project.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="video-thumbnail-wrapper" onClick={() => handlePlay(project)}>
+                    <img 
+                      src={project.thumbnail} 
+                      alt={project.title} 
+                      className="video-thumbnail"
+                    />
+                    <div className="play-overlay">
+                      <div className="play-button-nlm">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                          <path fill="currentColor" d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                );
-              })}
+                )}
+              </div>
+
+              <div className="card-metadata">
+                <div className="meta-row">
+                  <span className="meta-label">ID:</span>
+                  <span className="meta-value">{project.videoId}</span>
+                </div>
+                {project.date && (
+                  <div className="meta-row">
+                    <span className="meta-label">Updated:</span>
+                    <span className="meta-value">{project.date}</span>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          ))}
         </div>
       </div>
     </section>
@@ -170,3 +157,5 @@ const Work = () => {
 };
 
 export default Work;
+
+
