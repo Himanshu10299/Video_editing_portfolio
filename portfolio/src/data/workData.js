@@ -102,6 +102,11 @@ export const youtubeVideos = [
     tags: ["Daily life"]
   },
   {
+    url: "https://youtube.com/shorts/q59JaLUU7FE?feature=share",
+    category: "Short form",
+    tags: ["Daily life"]
+  },
+  {
     url: "https://youtu.be/gXUDIr_vdqM",
     category: "Short form",
     tags: ["faceless", "Documentary"]
